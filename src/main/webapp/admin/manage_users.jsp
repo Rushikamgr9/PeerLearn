@@ -28,3 +28,31 @@
         .action-form { display: inline-block; margin-right: 0.5rem; }
         td form button { background: none; border: none; cursor: pointer; text-decoration: underline; font-weight: 500;}
     </style>
+<body>
+<header>
+    <a href="AdminServlet?action=dashboard" class="brand">PeerLearn Admin</a>
+    <nav>
+        <a href="AdminServlet?action=approvals">Approvals</a>
+        <a href="AdminServlet?action=users" style="color: var(--primary-color);">Manage Users</a>
+        <a href="AdminServlet?action=posts">Manage Posts</a>
+        <a href="../AuthServlet?action=logout">Logout</a>
+    </nav>
+</header>
+<div class="container">
+    <h2>Manage Platform Users</h2>
+    <div class="card" style="margin-top: 2rem; overflow-x: auto;">
+            <% if(users == null || users.isEmpty()) { %>
+        <p style="color: var(--text-muted);">No users registered yet.</p>
+            <% } else { %>
+        <table>
+            <tr>
+                <th>ID</th><th>Username</th><th>Name</th><th>Status</th><th>Actions</th>
+            </tr>
+        </table>
+
+        </table>
+        <% } %>
+    </div>
+</div>
+</body>
+</html>
