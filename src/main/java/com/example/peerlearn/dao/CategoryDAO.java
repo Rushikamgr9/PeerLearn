@@ -1,7 +1,7 @@
 package com.example.peerlearn.dao;
 
-import com.peerlearn.model.Category;
-import com.peerlearn.util.DBConnection;
+import com.example.peerlearn.model.Category;
+import com.example.peerlearn.util.DBConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
