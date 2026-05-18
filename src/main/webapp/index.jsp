@@ -50,7 +50,17 @@
                        value="<%= request.getParmeter("search") != null ? request.getParameter("search") : "" %>"
                        style="flex-grow: 1;">
 
-
+                <select name="category_id" style="width: 200px;">
+                    <option value="">All Categories</option>
+                    <% if (categories != null) {
+                        String selectedCat = request.getParameter("category_id");
+                        for (Category cat : categories) { %>
+                    <option value="<%= cat.getId() %>" <%= (selectedCat != null && selectedCat.equals(String.valueOf(cat.getId()))) ? "selected" : "" %>>
+                        <%= cat.getName() %>
+                    </option>
+                    <%  }
+                    } %>
+                </select>
     </div>
 </body>
 </html>
