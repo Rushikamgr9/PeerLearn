@@ -11,6 +11,18 @@
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<%
+
+
+    List<Post> posts = (List<Post>) request.getAttribute("posts");
+    List<Category> categories = (List<Category>) request.getAttribute("categories");
+
+    // Safety redirect if attributes missing
+    if(posts == null) {
+        response.sendRedirect("PostServlet?action=list");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,15 +79,28 @@
         </div>
 
         <div class="grid">
-                <% if (posts.isEmpty()) { %>
+            <% if (posts.isEmpty()) { %>
             <p style="color: var(--text-muted); grid-column: 1 / -1; text-align: center; padding: 3rem;">No posts found matching your criteria.</p>
-                <% } else {
+            <% } else {
                 for(Post p : posts) { %>
             <div class="card" style="display: flex; flex-direction: column;">
                 <span style="color: var(--primary-color); font-weight: 600; font-size: 0.875rem;"><%= p.getCategoryName() %></span>
                 <h3 class="post-title"><%= p.getTitle() %></h3>
                 <p class="post-meta">Posted by <strong><%= p.getAuthorName() %></strong> on <%= p.getCreatedAt() %></p>
 
+                <div style="margin-top: auto; display: flex; justify-content: space-between;">
+                    <a href="PostServlet?action=view&id=<%= p.getId() %>" class="btn-primary" style="text-decoration: none; padding: 0.5rem 1rem; font-size: 0.875rem;">View Discussion</a>
+                    <form action="PostServlet" method="POST" style="margin: 0;">
+                        <input type="hidden" name="action" value="addToWishlist">
+                        <input type="hidden" name="postId" value="<%= p.getId() %>">
+                        <input type="hidden" name="postTitle" value="<%= p.getTitle() %>">
+                        <button type="submit" style="background:none; border:none; cursor:pointer; color: var(--primary-color); text-decoration: underline; font-size: 0.875rem;">+ Wishlist</button>
+                    </form>
+                </div>
             </div>
+            <%  }
+            } %>
+        </div>
+    </div>
 </body>
 </html>
