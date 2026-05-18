@@ -35,5 +35,22 @@
             <a href="AuthServlet?action=logout">Logout</a>
         </nav>
     </header>
+
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <h2>Community Feed</h2>
+            <a href="PostServlet?action=new" class="btn-primary" style="text-decoration: none;">+ Ask Question</a>
+        </div>
+
+        <div class="filter-bar">
+            <form action="PostServlet" method="GET" style="display: flex; gap: 1rem; width: 100%;">
+                <input type="hidden" name="action" value="list">
+
+                <input type="text" name="search" placeholder="Search titles or authors..."
+                       value="<%= request.getParmeter("search") != null ? request.getParameter("search") : "" %>"
+                       style="flex-grow: 1;">
+
+
+    </div>
 </body>
 </html>
