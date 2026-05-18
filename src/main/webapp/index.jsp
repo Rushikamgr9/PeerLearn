@@ -61,6 +61,21 @@
                     <%  }
                     } %>
                 </select>
-    </div>
+
+                <button type="submit" class="btn-primary" style="width: auto;">Filter</button>
+            </form>
+        </div>
+
+        <div class="grid">
+                <% if (posts.isEmpty()) { %>
+            <p style="color: var(--text-muted); grid-column: 1 / -1; text-align: center; padding: 3rem;">No posts found matching your criteria.</p>
+                <% } else {
+                for(Post p : posts) { %>
+            <div class="card" style="display: flex; flex-direction: column;">
+                <span style="color: var(--primary-color); font-weight: 600; font-size: 0.875rem;"><%= p.getCategoryName() %></span>
+                <h3 class="post-title"><%= p.getTitle() %></h3>
+                <p class="post-meta">Posted by <strong><%= p.getAuthorName() %></strong> on <%= p.getCreatedAt() %></p>
+
+            </div>
 </body>
 </html>
