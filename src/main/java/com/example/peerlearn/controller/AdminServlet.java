@@ -1,10 +1,10 @@
-package com.peerlearn.controller;
+package com.example.peerlearn.controller;
 
-import com.peerlearn.dao.AdminDAO;
-import com.peerlearn.dao.PostDAO;
-import com.peerlearn.dao.UserDAO;
-import com.peerlearn.model.Post;
-import com.peerlearn.model.User;
+import com.example.peerlearn.dao.AdminDAO;
+import com.example.peerlearn.dao.PostDAO;
+import com.example.peerlearn.dao.UserDAO;
+import com.example.peerlearn.model.Post;
+import com.example.peerlearn.model.User;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

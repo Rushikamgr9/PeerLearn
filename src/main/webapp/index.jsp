@@ -12,7 +12,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
-
+    User user = (User) session.getAttribute("user");
+    if (user == null || "PENDING".equals(user.getStatus())) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
 
     List<Post> posts = (List<Post>) request.getAttribute("posts");
     List<Category> categories = (List<Category>) request.getAttribute("categories");
