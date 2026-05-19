@@ -5,8 +5,8 @@
   Time: 11:26 AM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page import="com.peerlearn.model.User" %>
-<%@ page import="com.peerlearn.model.Post" %>
+<%@ page import="com.example.peerlearn.model.User" %>
+<%@ page import="com.example.peerlearn.model.Post" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%

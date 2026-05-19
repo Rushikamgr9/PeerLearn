@@ -1,4 +1,4 @@
-<%@ page import="com.peerlearn.model.User" %>
+<%@ page import="com.example.peerlearn.model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     User user = (User) session.getAttribute("user");
