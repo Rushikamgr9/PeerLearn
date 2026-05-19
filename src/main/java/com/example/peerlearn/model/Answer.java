@@ -27,7 +27,7 @@ public class Answer {
     public void setContent(String content) { this.content = content; }
 
     public int getLikesCount() { return likesCount; }
-+    public void setLikesCount(int likesCount) { this.likesCount = likesCount; }
+    public void setLikesCount(int likesCount) { this.likesCount = likesCount; }
 
     public Timestamp getCreatedAt() { return createdAt; }
     public void setCreatedAt(Timestamp createdAt) { this.createdAt = createdAt; }
