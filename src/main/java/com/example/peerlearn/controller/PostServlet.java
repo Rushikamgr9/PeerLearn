@@ -1,7 +1,9 @@
 package com.example.peerlearn.controller;
 
+import com.example.peerlearn.dao.AnswerDAO;
 import com.example.peerlearn.dao.CategoryDAO;
 import com.example.peerlearn.dao.PostDAO;
+import com.example.peerlearn.model.Answer;
 import com.example.peerlearn.model.Category;
 import com.example.peerlearn.model.Post;
 import com.example.peerlearn.model.User;
