@@ -5,12 +5,11 @@
   Time: 8:29 PM
   To change this template use File | Settings | File Templates.
 --%>
-
+<%@ page import="com.example.peerlearn.model.User" %>
 <%@ page import="com.example.peerlearn.model.Post" %>
 <%@ page import="com.example.peerlearn.model.Category" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <%
     User user = (User) session.getAttribute("user");
     if (user == null || "PENDING".equals(user.getStatus())) {
@@ -40,71 +39,71 @@
     </style>
 </head>
 <body>
-    <header>
-        <a href="PostServlet?action=list" class="brand">PeerLearn</a>
-        <nav>
-            <a href="UserServlet?action=viewProfile">My Profile</a>
-            <a href="PostServlet?action=wishlist">Wishlist</a>
-            <% if ("ADMIN".equals(user.getRole())) { %>
-            <a href="admin/dashboard.jsp" style="color: var(--primary-color);">Admin Panel</a>
-            <% } %>
-            <a href="AuthServlet?action=logout">Logout</a>
-        </nav>
-    </header>
+<header>
+    <a href="PostServlet?action=list" class="brand">PeerLearn</a>
+    <nav>
+        <a href="UserServlet?action=viewProfile">My Profile</a>
+        <a href="PostServlet?action=wishlist">Wishlist</a>
+        <% if ("ADMIN".equals(user.getRole())) { %>
+        <a href="admin/dashboard.jsp" style="color: var(--primary-color);">Admin Panel</a>
+        <% } %>
+        <a href="AuthServlet?action=logout">Logout</a>
+    </nav>
+</header>
 
-    <div class="container">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-            <h2>Community Feed</h2>
-            <a href="PostServlet?action=new" class="btn-primary" style="text-decoration: none;">+ Ask Question</a>
-        </div>
-
-        <div class="filter-bar">
-            <form action="PostServlet" method="GET" style="display: flex; gap: 1rem; width: 100%;">
-                <input type="hidden" name="action" value="list">
-
-                <input type="text" name="search" placeholder="Search titles or authors..."
-                       value="<%= request.getParmeter("search") != null ? request.getParameter("search") : "" %>"
-                       style="flex-grow: 1;">
-
-                <select name="category_id" style="width: 200px;">
-                    <option value="">All Categories</option>
-                    <% if (categories != null) {
-                        String selectedCat = request.getParameter("category_id");
-                        for (Category cat : categories) { %>
-                    <option value="<%= cat.getId() %>" <%= (selectedCat != null && selectedCat.equals(String.valueOf(cat.getId()))) ? "selected" : "" %>>
-                        <%= cat.getName() %>
-                    </option>
-                    <%  }
-                    } %>
-                </select>
-
-                <button type="submit" class="btn-primary" style="width: auto;">Filter</button>
-            </form>
-        </div>
-
-        <div class="grid">
-            <% if (posts.isEmpty()) { %>
-            <p style="color: var(--text-muted); grid-column: 1 / -1; text-align: center; padding: 3rem;">No posts found matching your criteria.</p>
-            <% } else {
-                for(Post p : posts) { %>
-            <div class="card" style="display: flex; flex-direction: column;">
-                <span style="color: var(--primary-color); font-weight: 600; font-size: 0.875rem;"><%= p.getCategoryName() %></span>
-                <h3 class="post-title"><%= p.getTitle() %></h3>
-                <p class="post-meta">Posted by <strong><%= p.getAuthorName() %></strong> on <%= p.getCreatedAt() %></p>
-
-                <div style="margin-top: auto; display: flex; justify-content: space-between;">
-                    <a href="PostServlet?action=view&id=<%= p.getId() %>" class="btn-primary" style="text-decoration: none; padding: 0.5rem 1rem; font-size: 0.875rem;">View Discussion</a>
-                    <form action="PostServlet" method="POST" style="margin: 0;">
-                        <input type="hidden" name="action" value="addToWishlist">
-                        <input type="hidden" name="postId" value="<%= p.getId() %>">
-                        <input type="hidden" name="postTitle" value="<%= p.getTitle() %>">
-                        <button type="submit" style="background:none; border:none; cursor:pointer; color: var(--primary-color); text-decoration: underline; font-size: 0.875rem;">+ Wishlist</button>
-                    </form>
-                </div>
-            </div>
-            <%  }
-            } %>
-        </div>
+<div class="container">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <h2>Community Feed</h2>
+        <a href="PostServlet?action=new" class="btn-primary" style="text-decoration: none;">+ Ask Question</a>
     </div>
+
+    <div class="filter-bar">
+        <form action="PostServlet" method="GET" style="display: flex; gap: 1rem; width: 100%;">
+            <input type="hidden" name="action" value="list">
+
+            <input type="text" name="search" placeholder="Search titles or authors..."
+                   value="<%= request.getParameter("search") != null ? request.getParameter("search") : "" %>"
+                   style="flex-grow: 1;">
+
+            <select name="category_id" style="width: 200px;">
+                <option value="">All Categories</option>
+                <% if (categories != null) {
+                    String selectedCat = request.getParameter("category_id");
+                    for (Category cat : categories) { %>
+                <option value="<%= cat.getId() %>" <%= (selectedCat != null && selectedCat.equals(String.valueOf(cat.getId()))) ? "selected" : "" %>>
+                    <%= cat.getName() %>
+                </option>
+                <%  }
+                } %>
+            </select>
+
+            <button type="submit" class="btn-primary" style="width: auto;">Filter</button>
+        </form>
+    </div>
+
+    <div class="grid">
+        <% if (posts.isEmpty()) { %>
+        <p style="color: var(--text-muted); grid-column: 1 / -1; text-align: center; padding: 3rem;">No posts found matching your criteria.</p>
+        <% } else {
+            for(Post p : posts) { %>
+        <div class="card" style="display: flex; flex-direction: column;">
+            <span style="color: var(--primary-color); font-weight: 600; font-size: 0.875rem;"><%= p.getCategoryName() %></span>
+            <h3 class="post-title"><%= p.getTitle() %></h3>
+            <p class="post-meta">Posted by <strong><%= p.getAuthorName() %></strong> on <%= p.getCreatedAt() %></p>
+
+            <div style="margin-top: auto; display: flex; justify-content: space-between;">
+                <a href="PostServlet?action=view&id=<%= p.getId() %>" class="btn-primary" style="text-decoration: none; padding: 0.5rem 1rem; font-size: 0.875rem;">View Discussion</a>
+                <form action="PostServlet" method="POST" style="margin: 0;">
+                    <input type="hidden" name="action" value="addToWishlist">
+                    <input type="hidden" name="postId" value="<%= p.getId() %>">
+                    <input type="hidden" name="postTitle" value="<%= p.getTitle() %>">
+                    <button type="submit" style="background:none; border:none; cursor:pointer; color: var(--primary-color); text-decoration: underline; font-size: 0.875rem;">+ Wishlist</button>
+                </form>
+            </div>
+        </div>
+        <%  }
+        } %>
+    </div>
+</div>
 </body>
 </html>
