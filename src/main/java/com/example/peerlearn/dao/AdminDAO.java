@@ -1,6 +1,6 @@
-package com.peerlearn.dao;
+package com.example.peerlearn.dao;
 
-import com.peerlearn.util.DBConnection;
+import com.example.peerlearn.util.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
